@@ -5,25 +5,30 @@ import java.awt.event.ActionListener;
 import java.awt.event.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.net.*;
 
 
-public class server extends JFrame implements ActionListener  {
+public class server implements ActionListener  {
 
     JTextField text1;
     JPanel a1;
-    Box vertical = Box.createVerticalBox();
+    static Box vertical = Box.createVerticalBox();
+    static JFrame f = new JFrame();
+    static DataOutputStream dout;
     server(){
 
-        setLayout(null);
+        f.setLayout(null);
 
         //header frame
         JPanel p1 = new JPanel();
         p1.setBackground(new Color(7,94,84));
         p1.setBounds(0,0,450,70);
         p1.setLayout(null);
-        add(p1);
+        f.add(p1);
 
 
         //set image icon
@@ -84,13 +89,13 @@ public class server extends JFrame implements ActionListener  {
 
         a1 = new JPanel();
         a1.setBounds(5,75,440,570);
-        add(a1);
+        f.add(a1);
 
         //text frame
         text1 = new JTextField();
         text1.setBounds(5,555,310,40);
         text1.setFont(new Font("SAN_SERIF", Font.PLAIN, 16));
-        add(text1);
+        f.add(text1);
 
         JButton send = new JButton("Send");
         send.setBounds(320,555,123,40);
@@ -98,36 +103,42 @@ public class server extends JFrame implements ActionListener  {
         send.setForeground(Color.WHITE);
         send.addActionListener(this);
         send.setFont(new Font("SAN_SERIF", Font.PLAIN, 16));
-        add(send);
+        f.add(send);
 
 
-        setSize(450, 700);
-        setLocation(200, 50);
-        setUndecorated(true);
-        getContentPane().setBackground(Color.WHITE);
+        f.setSize(450, 700);
+        f.setLocation(200, 50);
+        f.setUndecorated(true);
+        f.getContentPane().setBackground(Color.WHITE);
 
 
-        setVisible(true);
+        f.setVisible(true);
     }
     public void actionPerformed(ActionEvent ae){
-        String out = text1.getText();
-        JPanel p2 = formatLabel(out);
+        try {
+            String out = text1.getText();
+            JPanel p2 = formatLabel(out);
 
 
-        a1.setLayout(new BorderLayout());
+            a1.setLayout(new BorderLayout());
 
-        JPanel right = new JPanel(new BorderLayout());
-        right.add(p2,BorderLayout.LINE_END);
-        vertical.add(right);
-        vertical.add(Box.createVerticalStrut(15));
+            JPanel right = new JPanel(new BorderLayout());
+            right.add(p2, BorderLayout.LINE_END);
+            vertical.add(right);
+            vertical.add(Box.createVerticalStrut(15));
 
-        a1.add(vertical,BorderLayout.PAGE_START);
+            a1.add(vertical, BorderLayout.PAGE_START);
 
-        text1.setText("");
+            dout.writeUTF(out);
 
-        repaint();
-        invalidate();
-        validate();
+            text1.setText("");
+
+            f.repaint();
+            f.invalidate();
+            f.validate();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
 
 
     }
@@ -156,5 +167,28 @@ public class server extends JFrame implements ActionListener  {
     }
     public static void main(String[] args) {
         new server();
+
+        try{
+            ServerSocket skt = new ServerSocket(6001);
+            while(true){
+                Socket s = skt.accept();
+                DataInputStream din = new DataInputStream(s.getInputStream());
+                 dout = new DataOutputStream(s.getOutputStream());
+
+                while(true){
+                    String msg = din.readUTF();
+                    JPanel panel = formatLabel(msg);
+
+                    JPanel left = new JPanel(new BorderLayout());
+                    left.add(panel, BorderLayout.LINE_START);
+                    vertical.add(left);
+                    f.validate();
+                }
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+
+        }
     }
 }

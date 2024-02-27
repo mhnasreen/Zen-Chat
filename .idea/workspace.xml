@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9c60ef9f-9fb5-45f1-91eb-6e7124126c08" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -99,7 +98,21 @@
       <option name="project" value="LOCAL" />
       <updated>1708981659245</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add client class">
+      <created>1709028935323</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1709028935323</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add changes to the server class">
+      <created>1709029074148</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1709029074148</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -117,6 +130,8 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="add header and footer to frame" />
     <MESSAGE value="add complete server functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="add complete server functionality" />
+    <MESSAGE value="add client class" />
+    <MESSAGE value="add changes to the server class" />
+    <option name="LAST_COMMIT_MESSAGE" value="add changes to the server class" />
   </component>
 </project>
