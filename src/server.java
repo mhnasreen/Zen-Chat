@@ -3,7 +3,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
-import java.sql.SQLOutput;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -154,6 +155,6 @@ public class server extends JFrame implements ActionListener  {
         return panel;
     }
     public static void main(String[] args) {
-        new server();
+        new client();
     }
 }
