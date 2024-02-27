@@ -155,6 +155,6 @@ public class server extends JFrame implements ActionListener  {
         return panel;
     }
     public static void main(String[] args) {
-        new client();
+        new server();
     }
 }
